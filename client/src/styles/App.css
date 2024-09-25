@@ -1,0 +1,10 @@
+.App {
+  text-align: center;
+}
+
+.footer {
+  background-color: #f8f9fa; /* Google Gray */
+  padding: 10px;
+  bottom: 0;
+  width: 100%;
+}

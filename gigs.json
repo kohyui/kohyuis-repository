@@ -1,0 +1,153 @@
+[{
+  "_id": {
+    "$oid": "6622500052dc15378fdccd9d"
+  },
+  "id": 1,
+  "name": "elton Lee",
+  "profilePicture": "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg",
+  "country": "Singapore",
+  "price": "100/hr",
+  "title": "Wedding Photography",
+  "Website": "https://www.johnlee.com",
+  "Instagram": "https://www.instagram.com/johnlee",
+  "description": "My craft is capturing love stories through timeless wedding photography.",
+  "images": [
+    "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg",
+    "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg",
+    "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6622500052dc15378fdccd9e"
+  },
+  "id": 2,
+  "name": "Liang Wei",
+  "profilePicture": "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg",
+  "country": "Singapore",
+  "price": "120/hr",
+  "title": "Chinese Wedding Photography",
+  "Instagram": "https://www.instagram.com/liangwei",
+  "Website": "https://www.liangweiphotography.com",
+  "description": "My craft is immortalizing Chinese wedding traditions in vibrant photographs.",
+  "images": [
+    "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg",
+    "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg",
+    "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6622500052dc15378fdccd9f"
+  },
+  "id": 3,
+  "name": "Raj Kumar",
+  "profilePicture": "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg",
+  "country": "Singapore",
+  "price": "110/hr",
+  "title": "Event Photography",
+  "Instagram": "https://www.instagram.com/rajkumar",
+  "Website": "https://www.rajkumarevents.com",
+  "description": "My craft is capturing memorable moments in dynamic event photography.",
+  "images": [
+    "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg",
+    "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg",
+    "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6622500052dc15378fdccda0"
+  },
+  "id": 4,
+  "name": "Sophia Tan",
+  "profilePicture": "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg",
+  "country": "Singapore",
+  "price": "90/hr",
+  "title": "Portrait Photography",
+  "Instagram": "https://www.instagram.com/sophiatan",
+  "Website": "https://www.sophiatanportraits.com",
+  "description": "My craft is portraying personalities in unique, expressive portraitures.",
+  "images": [
+    "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg",
+    "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg",
+    "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg",
+    "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6622500052dc15378fdccda1"
+  },
+  "id": 5,
+  "name": "Muhammad Zaki",
+  "profilePicture": "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg",
+  "country": "Singapore",
+  "price": "100/hr",
+  "title": "E-commerce Photography",
+  "Instagram": "https://www.instagram.com/muhammadzaki",
+  "Website": "https://www.zakiecommercephotos.com",
+  "description": "My craft is enhancing online brands with striking product visuals.",
+  "images": [
+    "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg",
+    "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg",
+    "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6622500052dc15378fdccda2"
+  },
+  "id": 6,
+  "name": "Rosie Lim",
+  "profilePicture": "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg",
+  "country": "Singapore",
+  "price": "140/hr",
+  "title": "Architectural Photography",
+  "Instagram": "https://www.instagram.com/rosielim",
+  "Website": "https://www.rosielimarchitecture.com",
+  "description": "My craft is revealing architecture's beauty through detailed imagery.",
+  "images": [
+    "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg",
+    "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg",
+    "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6622500052dc15378fdccda3"
+  },
+  "id": 7,
+  "name": "Alex Tan",
+  "profilePicture": "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg",
+  "country": "Singapore",
+  "price": "150/hr",
+  "title": "Landscape Photography",
+  "Instagram": "https://www.instagram.com/alextan",
+  "Website": "https://www.alextanlandscapes.com",
+  "description": "My craft is capturing nature's and urban landscapes' breathtaking beauty.",
+  "images": [
+    "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg",
+    "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg",
+    "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6622500052dc15378fdccda4"
+  },
+  "id": 8,
+  "name": "Jasmine Koh",
+  "profilePicture": "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg",
+  "country": "Singapore",
+  "price": "130/hr",
+  "title": "Food Photography",
+  "Instagram": "https://www.instagram.com/jasminekoh",
+  "Website": "https://www.jasminekohdelights.com",
+  "description": "My craft is making culinary creations shine in appetizing photography.",
+  "images": [
+    "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg",
+    "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg",
+    "https://res.cloudinary.com/djzawocta/image/upload/v1713435184/JL1_l9lmp0.jpg"
+  ]
+}]
