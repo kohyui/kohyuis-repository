@@ -1,0 +1,77 @@
+.gig-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .gig-heading {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .gig-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+  
+  .gig-form-group {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  
+  .gig-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: left;
+  }
+  
+  .gig-form-group input[type="text"],
+  .gig-form-group input[type="file"],
+  .gig-form-group textarea,
+  .gig-form-group select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  
+  .gig-form-group textarea.description-field {
+    font-family: inherit; /* Ensures the font is inherited from the parent */
+  }
+  
+  .gig-form-group select.select-field {
+    text-align: left;
+  }
+  
+  .image-preview-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  
+  .image-preview {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    object-fit: cover;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #7851A9;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  
+  button:hover {
+    background-color: #6a3d9a;
+  }
+  

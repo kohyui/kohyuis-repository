@@ -32,8 +32,8 @@ const gigSchema = new mongoose.Schema({
   sellerWebsite: {
     type: String
   },
-  portfolioImage: {  // Single image URL
-    type: String,
+  portfolioImages: {  // Change from single image URL to an array of URLs
+    type: [String],
     required: true
   }
 }, {

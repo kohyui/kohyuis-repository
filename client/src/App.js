@@ -9,8 +9,6 @@ import About from './pages/About';
 import HowItWorks from './pages/HowItWorks';
 import BecomeASeller from './pages/BecomeASeller';
 import SellerRegistration from './components/SellerRegistration';
-import KY from './pages/KY';
-import Elton from './pages/Elton';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Terms from './pages/Terms';
 import AuthModal from './components/AuthModal';

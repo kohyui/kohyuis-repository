@@ -1,15 +1,18 @@
 import express from 'express';
 import { v2 as cloudinaryV2 } from 'cloudinary';
 import formidable from 'formidable';
+import dotenv from 'dotenv';
 import GigModel from '../models/GigModel.js';
+
+dotenv.config(); // Load environment variables from .env file
 
 const router = express.Router();
 
-// Configure Cloudinary (if you're using it)
+// Configure Cloudinary using environment variables
 cloudinaryV2.config({
-  cloud_name: 'your-cloudinary-name',
-  api_key: 'your-api-key',
-  api_secret: 'your-api-secret'
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 // ---------- ROUTES ----------
@@ -24,13 +27,13 @@ router.get('/', async (req, res) => {
   }
 });
 
-// 2. Add a new gig with a single portfolio image upload
+// 2. Add a new gig with multiple portfolio images upload
 router.post('/', async (req, res) => {
-  const { price, title, description, sellerUsername, sellerDisplayName, sellerProfilePicture, sellerInstagram, sellerWebsite, portfolioImage } = req.body;
+  const { price, title, description, sellerUsername, sellerDisplayName, sellerProfilePicture, sellerInstagram, sellerWebsite, portfolioImages } = req.body;
 
   // Validate the incoming gig data
-  if (!price || !title || !description || !sellerUsername || !sellerDisplayName || !sellerProfilePicture || !portfolioImage) {
-    return res.status(400).json({ message: 'Missing required fields' });
+  if (!price || !title || !description || !sellerUsername || !sellerDisplayName || !sellerProfilePicture || !portfolioImages || !Array.isArray(portfolioImages) || portfolioImages.length === 0) {
+    return res.status(400).json({ message: 'Missing required fields or portfolio images are not formatted correctly' });
   }
 
   try {
@@ -44,7 +47,7 @@ router.post('/', async (req, res) => {
       sellerProfilePicture,
       sellerInstagram,
       sellerWebsite,
-      portfolioImage // Add the single image URL to the gig data
+      portfolioImages, // Add the array of image URLs to the gig data
     });
 
     const newGig = await gig.save(); // Save the new gig to MongoDB
@@ -55,25 +58,32 @@ router.post('/', async (req, res) => {
 });
 
 // 3. Upload portfolio image (directly to Cloudinary)
+router.post('/upload-portfolio-images', (req, res) => {
+  const form = formidable({ multiples: true }); // Allow multiple files
 
-router.post('/upload-portfolio-image', (req, res) => {
-  const form = formidable();
-  
   form.parse(req, async (err, fields, files) => {
     if (err) {
-      return res.status(500).json({ messge: 'Form parsing error', error: err.message });
+      return res.status(500).json({ message: 'Form parsing error', error: err.message });
     }
 
-    const file = files.portfolioImage;
+    const uploadedUrls = [];
 
     try {
-      const result = await cloudinaryV2.uploader.upload(file.filepath, {
-        folder: 'portfolio_images',
-      });
+      // If there's only one file, handle it as an array for consistency
+      const imageFiles = Array.isArray(files.portfolioImages) ? files.portfolioImages : [files.portfolioImages];
 
-      res.status(200).json({ url: result.secure_url });
+      // Upload each file to Cloudinary
+      for (const file of imageFiles) {
+        const result = await cloudinaryV2.uploader.upload(file.filepath, {
+          folder: 'portfolio_images',
+        });
+        uploadedUrls.push(result.secure_url); // Add the uploaded URL to the array
+      }
+
+      res.status(200).json({ urls: uploadedUrls });
     } catch (error) {
-      res.status(500).json({ message: 'Failed to upload image', error: error.message });
+      console.error('Cloudinary upload error:', error);
+      res.status(500).json({ message: 'Failed to upload images', error: error.message });
     }
   });
 });

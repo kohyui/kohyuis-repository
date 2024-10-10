@@ -25,11 +25,6 @@ function TopBar({ onSearch }) {
     openAuthModal(view, intendedRoute);
   };
 
-  const handleLogout = () => {
-    logOut();
-    navigate('/');
-  };
-
   return (
     <AppBar position="static" sx={{ backgroundColor: 'transparent', boxShadow: 'none', padding: 0 }}>
       <Toolbar disableGutters sx={{
@@ -92,12 +87,6 @@ function TopBar({ onSearch }) {
               <IconButton onClick={() => navigate('/profile')} sx={{ color: 'black' }}>
                 <AccountCircle />
               </IconButton>
-              <Button 
-                sx={{ color: 'black', textTransform: 'none', fontFamily: "'Roboto', sans-serif", height: '36px', fontSize: '0.875rem', mx: '10px' }} 
-                onClick={handleLogout}
-              >
-                Log Out
-              </Button>
             </>
           ) : (
             <>
