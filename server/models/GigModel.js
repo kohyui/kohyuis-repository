@@ -32,8 +32,12 @@ const gigSchema = new mongoose.Schema({
   sellerWebsite: {
     type: String
   },
-  portfolioImages: {  // Change from single image URL to an array of URLs
+  portfolioImages: {  
     type: [String],
+    required: true
+  },
+  countryImage: {  
+    type: String,
     required: true
   }
 }, {

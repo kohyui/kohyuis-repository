@@ -29,11 +29,11 @@ router.get('/', async (req, res) => {
 
 // 2. Add a new gig with multiple portfolio images upload
 router.post('/', async (req, res) => {
-  const { price, title, description, sellerUsername, sellerDisplayName, sellerProfilePicture, sellerInstagram, sellerWebsite, portfolioImages } = req.body;
+  const { price, title, description, sellerUsername, sellerDisplayName, sellerProfilePicture, sellerInstagram, sellerWebsite, portfolioImages, countryImage } = req.body;
 
   // Validate the incoming gig data
-  if (!price || !title || !description || !sellerUsername || !sellerDisplayName || !sellerProfilePicture || !portfolioImages || !Array.isArray(portfolioImages) || portfolioImages.length === 0) {
-    return res.status(400).json({ message: 'Missing required fields or portfolio images are not formatted correctly' });
+  if (!price || !title || !description || !sellerUsername || !sellerDisplayName || !sellerProfilePicture || !portfolioImages || !Array.isArray(portfolioImages) || portfolioImages.length === 0 || !countryImage) {
+    return res.status(400).json({ message: 'Missing required fields or data is not formatted correctly.' });
   }
 
   try {
@@ -48,16 +48,18 @@ router.post('/', async (req, res) => {
       sellerInstagram,
       sellerWebsite,
       portfolioImages, // Add the array of image URLs to the gig data
+      countryImage,     // Include the country image in the gig data
     });
 
     const newGig = await gig.save(); // Save the new gig to MongoDB
     res.status(201).json(newGig); // Return the new gig as JSON
   } catch (error) {
+    console.error('Error creating gig:', error);
     res.status(400).json({ message: 'Failed to create gig. Please check your input and try again.' });
   }
 });
 
-// 3. Upload portfolio image (directly to Cloudinary)
+// 3. Upload portfolio images (directly to Cloudinary)
 router.post('/upload-portfolio-images', (req, res) => {
   const form = formidable({ multiples: true }); // Allow multiple files
 

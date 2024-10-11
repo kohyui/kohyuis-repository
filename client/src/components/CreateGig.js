@@ -9,7 +9,7 @@ const CreateGig = () => {
     price: '',
     title: '',
     description: '',
-    country: 'Singapore', // Default to Singapore
+    country: 'Singapore', // Store country name initially
     portfolioImages: [], // Array to hold multiple image URLs
   });
 
@@ -40,19 +40,35 @@ const CreateGig = () => {
     });
   };
 
+  // Handle country change to select the appropriate flag image
+  const handleCountryChange = (e) => {
+    setGigData({
+      ...gigData,
+      country: e.target.value, // Store the country name
+    });
+  };
+
   // Handle file change for multiple files
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files).slice(0, 5); // Limit to 5 files
-    setSelectedFiles([...selectedFiles, ...files]);
 
-    // Create preview URLs for all selected files
-    const previewUrls = files.map((file) => URL.createObjectURL(file));
-    setPreviews([...previews, ...previewUrls]); // Accumulate all previews
+    // Avoid adding duplicate files
+    const newFiles = files.filter((file) => !selectedFiles.find((f) => f.name === file.name && f.size === file.size));
+    setSelectedFiles([...selectedFiles, ...newFiles]); // Only add new unique files
+
+    // Create preview URLs for the new selected files
+    const newPreviews = newFiles.map((file) => URL.createObjectURL(file));
+    setPreviews([...previews, ...newPreviews]); // Accumulate all previews
   };
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (selectedFiles.length === 0) {
+      alert("Please upload at least one image.");
+      return;
+    }
 
     const formData = new FormData();
     selectedFiles.forEach((file) => {
@@ -67,10 +83,21 @@ const CreateGig = () => {
 
       const uploadedImageUrls = uploadResponse.data.urls;
 
-      // Prepare gig data with the image URLs
+      // Map the country to the corresponding flag image path
+      const countryImagePaths = {
+        Singapore: '/flags/SingaporeFlag.png',
+        Malaysia: '/flags/MalaysiaFlag.png',
+        Indonesia: '/flags/IndonesiaFlag.png',
+        Thailand: '/flags/ThailandFlag.png',
+        Philippines: '/flags/PhilippinesFlag.png',
+        Vietnam: '/flags/VietnamFlag.png',
+      };
+
+      // Prepare gig data with the image URLs and the corresponding flag image path
       const gigDetails = {
         ...gigData,
-        portfolioImages: uploadedImageUrls, // Add array of image URLs to gig data
+        portfolioImages: [...new Set(uploadedImageUrls)], // Ensure unique URLs
+        countryImage: countryImagePaths[gigData.country], // Use the correct flag path
         sellerUsername: user.username,
         sellerDisplayName: user.displayName,
         sellerProfilePicture: user.profilePicture,
@@ -82,7 +109,9 @@ const CreateGig = () => {
       const response = await axios.post('http://localhost:5001/gigs', gigDetails);
       if (response.status === 201) {
         alert('Gig created successfully!');
-        navigate('/gigs');
+        setSelectedFiles([]); // Clear selected files after successful submission
+        setPreviews([]); // Clear previews
+        navigate('/');
       }
     } catch (error) {
       console.error(error);
@@ -97,7 +126,7 @@ const CreateGig = () => {
       <h2 className="gig-heading">Create a New Gig</h2>
       <form onSubmit={handleSubmit} className="gig-form">
         <div className="gig-form-group">
-          <label>Price (S$)</label>
+          <label>Price per hour (S$)</label>
           <input 
             type="text" 
             name="price" 
@@ -135,7 +164,7 @@ const CreateGig = () => {
           <select
             name="country"
             value={gigData.country}
-            onChange={handleChange}
+            onChange={handleCountryChange}
             className="select-field"
           >
             <option value="Singapore">Singapore</option>

@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Typography,
-  Box,
-  Button,
-  Divider,
-  Avatar,
-  Paper,
-} from '@mui/material';
+import { Typography, Box, Button, Divider, Avatar, Paper } from '@mui/material';
 import { useAuth } from './AuthContext';
 import Layout from './Layout';
 import api from './api';
@@ -174,7 +167,7 @@ function Profile() {
             <Typography variant="body2" color="textSecondary">{user.email}</Typography>
           </Box>
 
-          <Divider sx={{ my: 3 }} />
+          {/* <Divider sx={{ my: 3 }} /> */}
 
           {user.isSeller && (
             <Box sx={{ textAlign: 'center', mb: 3 }}>
@@ -427,23 +420,31 @@ function Profile() {
                         </FieldArray>
                       </div>
                     </>
-                  )}
-
-                  <Button variant="contained" color="primary" type="submit" disabled={isSubmitting}>
+                  )}                  
+                  <Button type="submit" className="primary-button" disabled={isSubmitting} sx={{ textTransform: 'uppercase' }}>
                     Save Changes
                   </Button>
                 </Form>
               )}
             </Formik>
           ) : (
-            <Button variant="outlined" color="primary" onClick={() => setEditing(true)}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
+            <Button 
+              onClick={() => setEditing(true)} 
+              className="primary-button" 
+              sx={{ mr: 2 }}
+            >
               Edit Profile
             </Button>
+            <Button 
+              onClick={handleLogout} 
+              className="primary-button" 
+              sx={{ ml: 2 }}
+            >
+              Log Out
+            </Button>
+          </Box>          
           )}
-
-          <Button variant="contained" color="secondary" onClick={handleLogout}>
-            Log Out
-          </Button>
         </Paper>
       </Box>
     </Layout>

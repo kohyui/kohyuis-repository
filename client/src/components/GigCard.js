@@ -23,20 +23,19 @@ const GigCard = ({ gig }) => {
     return url;
   };
 
-  // Minimalist Custom Arrow components
+  // Custom Arrow components for the slider
   const NextArrow = ({ onClick }) => (
     <IconButton
       onClick={onClick}
       sx={{
         position: 'absolute',
         top: '50%',
-        right: '10px',
+        right: '5px',
         transform: 'translateY(-50%)',
         zIndex: 1,
         backgroundColor: 'transparent',
         color: '#444',
         '&:hover': { color: '#111' },
-        fontSize: '18px',
       }}
     >
       <ArrowForwardIosIcon sx={{ fontSize: '18px' }} />
@@ -49,103 +48,112 @@ const GigCard = ({ gig }) => {
       sx={{
         position: 'absolute',
         top: '50%',
-        left: '10px',
+        left: '5px',
         transform: 'translateY(-50%)',
         zIndex: 1,
         backgroundColor: 'transparent',
         color: '#444',
         '&:hover': { color: '#111' },
-        fontSize: '18px',
       }}
     >
       <ArrowBackIosIcon sx={{ fontSize: '18px' }} />
     </IconButton>
   );
 
-  // Slick carousel settings
+  // Slider settings
   const sliderSettings = {
-    dots: false,
-    infinite: true,
+    dots: false, // Removed slider dots below the images
+    infinite: gig.portfolioImages.length > 1,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: true,
+    arrows: gig.portfolioImages.length > 1,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
   };
 
   return (
-    <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-      <Card sx={{ height: '100%', width: '350px', display: 'flex', flexDirection: 'column', boxShadow: 'none', border: '1px solid #ddd' }}>
-        {/* Display the portfolio images in a carousel */}
-        <Box sx={{ position: 'relative', width: '100%', height: '230px', overflow: 'hidden', marginBottom: '0px', padding: '0px' }}>
-          <Slider {...sliderSettings}>
-            {gig.portfolioImages && gig.portfolioImages.length > 0 ? (
-              gig.portfolioImages.map((image, index) => (
-                <CardMedia
-                  key={index}
-                  component="img"
-                  image={image} // Use each image URL from the portfolioImages array
-                  alt={`Portfolio Image ${index + 1}`}
-                  sx={{
-                    width: '100%',
-                    maxHeight: '230px',
-                    objectFit: 'contain',
-                    borderRadius: '4px',
-                  }}
-                />
-              ))
-            ) : (
-              <Typography variant="body2" color="text.secondary" sx={{ padding: '16px', textAlign: 'center' }}>
-                No Portfolio Images Available
-              </Typography>
-            )}
-          </Slider>
-        </Box>
+    <Card sx={{ height: 'auto', width: '100%', maxWidth: '350px', boxShadow: 'none', border: '1px solid #ddd', margin: '10px' }}>
+      {/* Display the portfolio images in a carousel */}
+      <Box sx={{ position: 'relative', width: '100%', height: 'auto', maxHeight: '230px', margin: 0 }}>
+        <Slider {...sliderSettings}>
+          {gig.portfolioImages && gig.portfolioImages.length > 0 ? (
+            gig.portfolioImages.map((image, index) => (
+              <CardMedia
+                key={index}
+                component="img"
+                image={image}
+                alt={`Portfolio Image ${index + 1}`}
+                sx={{
+                  width: '100%',
+                  height: '230px',
+                  objectFit: 'cover',
+                }}
+              />
+            ))
+          ) : (
+            <Typography variant="body2" color="text.secondary" sx={{ padding: '16px', textAlign: 'center' }}>
+              No Portfolio Images Available
+            </Typography>
+          )}
+        </Slider>
+      </Box>
 
-        {/* Display seller's profile picture and display name */}
-        <Box sx={{ display: 'flex', alignItems: 'center', paddingLeft: '8px', marginBottom: '0px', marginTop: '0px', paddingTop: '0px', paddingBottom: '0px' }}>
+      {/* Seller Information and Flag */}
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 12px' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <CardMedia
             component="img"
-            image={gig.sellerProfilePicture}  // Seller's profile picture from the gig data
-            alt={gig.sellerDisplayName}       // Seller's display name used for alt text
-            sx={{ width: 28, height: 28, borderRadius: '50%', marginRight: '8px' }}
+            image={gig.sellerProfilePicture}
+            alt={gig.sellerDisplayName}
+            sx={{ width: 32, height: 32, borderRadius: '50%', marginRight: '8px' }}
           />
-          <Typography variant="h6" color="text.primary" sx={{ fontSize: '12px', fontWeight: 'bold', lineHeight: 1.2 }}>
-            {gig.sellerDisplayName}  {/* Seller's display name */}
+          <Typography variant="h6" color="text.primary" sx={{ fontSize: '14px', fontWeight: 'bold' }}>
+            {gig.sellerDisplayName}
           </Typography>
         </Box>
+        {gig.countryImage && (
+          <CardMedia
+            component="img"
+            image={gig.countryImage}
+            alt="Country Flag"
+            sx={{ width: 36, height: 24, borderRadius: '2px', marginLeft: '8px', objectFit: 'contain' }}  // Adjusted flag size and ensured no cut-off
+          />
+        )}
+      </Box>
 
-        <CardContent sx={{ padding: '0 8px', marginTop: '4px' }}>
-          <Tooltip title={<Typography sx={{ textAlign: 'left' }}>{gig.description}</Typography>} placement="bottom">
-            <Typography variant="body2" color="text.secondary" sx={{ fontSize: '12px', textAlign: 'left', width: '100%', lineHeight: 1.4 }}>
-              {shortenDescription(gig.description)}  {/* Shortened gig description */}
+      <CardContent sx={{ padding: '8px 12px', marginTop: '0px' }}>
+        <Tooltip title={<Typography sx={{ textAlign: 'left' }}>{gig.description}</Typography>} placement="bottom">
+          <Typography variant="body2" color="text.secondary" sx={{ fontSize: '12px', textAlign: 'left', lineHeight: 1.4 }}>
+            {shortenDescription(gig.description)}  {/* Shortened gig description */}
+          </Typography>
+        </Tooltip>
+
+        {/* Price and Social Icons */}
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Typography variant="body2" color="text.secondary" sx={{ fontSize: '12px', fontWeight: 'bold', marginRight: '8px' }}>
+              S${gig.price} /hour  {/* Updated price display */}
             </Typography>
-          </Tooltip>
-
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginTop: '4px' }}>
-            <Typography variant="body2" color="text.secondary" sx={{ fontSize: '12px', fontWeight: 'bold', lineHeight: 1.2 }}>
-              S${gig.price}  {/* Added S$ prefix for the price */}
-            </Typography>
-
-            <Box>
-              {/* Instagram Icon */}
-              {gig.sellerInstagram && (
-                <IconButton component="a" href={formatLink(gig.sellerInstagram)} target="_blank" aria-label="Instagram">
-                  <InstagramIcon sx={{ fontSize: '18px', color: '#666' }} />
-                </IconButton>
-              )}
-              {/* Website Icon */}
-              {gig.sellerWebsite && (
-                <IconButton component="a" href={formatLink(gig.sellerWebsite)} target="_blank" aria-label="Website">
-                  <LanguageIcon sx={{ fontSize: '18px', color: '#666' }} />
-                </IconButton>
-              )}
-            </Box>
           </Box>
-        </CardContent>
-      </Card>
-    </Box>
+
+          <Box>
+            {/* Instagram Icon */}
+            {gig.sellerInstagram && (
+              <IconButton component="a" href={formatLink(gig.sellerInstagram)} target="_blank" aria-label="Instagram" sx={{ padding: '4px' }}>
+                <InstagramIcon sx={{ fontSize: '18px', color: '#666' }} />
+              </IconButton>
+            )}
+            {/* Website Icon */}
+            {gig.sellerWebsite && (
+              <IconButton component="a" href={formatLink(gig.sellerWebsite)} target="_blank" aria-label="Website" sx={{ padding: '4px' }}>
+                <LanguageIcon sx={{ fontSize: '18px', color: '#666' }} />
+              </IconButton>
+            )}
+          </Box>
+        </Box>
+      </CardContent>
+    </Card>
   );
 };
 
